@@ -133,3 +133,17 @@ class Text(PanelsItemBase):
             'content': data.get('content', '')
         })
         return panel_json
+
+
+class Table(PanelsItemBase):
+    def gen_json_from_data(self, data, context):
+        panel_json = super(Table, self).gen_json_from_data(data, context)
+        panel_json.update({
+            'type': 'table',
+            'title': data.get('title', None),
+            'span': data.get('span', None),
+            'targets': map(lambda v: {'target': v}, data.get('targets', [])),
+            'transform': data.get('transform', None),
+        })
+        return panel_json
+            
